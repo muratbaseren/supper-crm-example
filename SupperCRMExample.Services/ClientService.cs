@@ -7,7 +7,6 @@ namespace SupperCRMExample.Services
         public void CreateNew()
         {
             // Create client
-
         }
     }
 }
