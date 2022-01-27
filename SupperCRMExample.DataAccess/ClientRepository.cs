@@ -4,7 +4,12 @@ using SupperCRMExample.Entities;
 
 namespace SupperCRMExample.DataAccess
 {
-    public class ClientRepository : Repository<Client>, IRepository<Client>
+    public interface IClientRepository : IRepository<Client>
+    {
+
+    }
+
+    public class ClientRepository : Repository<Client>, IClientRepository
     {
         private readonly DatabaseContext _context;
 
