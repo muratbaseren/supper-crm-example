@@ -1,14 +1,13 @@
-﻿using System;
+﻿using SupperCRMExample.Entities.Abstract;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SupperCRMExample.Entities
 {
     [Table("Clients")]
-    public class Client
+    public class Client : EntityBase
     {
-        [Key]
-        public int Id { get; set; }
 
         [Required, StringLength(60)]
         public string Name { get; set; } // John Doe or Codeove
