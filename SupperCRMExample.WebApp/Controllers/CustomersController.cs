@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SupperCRMExample.Models;
+using SupperCRMExample.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,19 @@ namespace SupperCRMExample.WebApp.Controllers
 {
     public class CustomersController : Controller
     {
+        private readonly IClientService _clientService;
+
+        public CustomersController(IClientService clientService)
+        {
+            _clientService = clientService;
+        }
+
+
         // GET: CustomersController
         public ActionResult Index()
         {
-            return View();
+            var clients = _clientService.List();
+            return View(clients);
         }
 
         // GET: CustomersController/Details/5
@@ -30,16 +41,15 @@ namespace SupperCRMExample.WebApp.Controllers
         // POST: CustomersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CreateCustomerModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
+                _clientService.Create(model);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(model);
         }
 
         // GET: CustomersController/Edit/5

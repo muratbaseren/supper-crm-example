@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SupperCRMExample.DataAccess\SupperCRMExample.DataAccess.csproj" />
+    <ProjectReference Include="..\SupperCRMExample.Models\SupperCRMExample.Models.csproj" />
   </ItemGroup>
 
 </Project>
