@@ -2,6 +2,12 @@
     ViewData["Title"] = "Müşteriler";
 }
 
+@*<style>
+    .input-group.input-group-outline .form-label{
+        top:-0.6rem;
+    }
+</style>*@
+
 <div class="row">
     <div class="col-12">
         <div class="card my-4">
@@ -11,6 +17,20 @@
                 </div>
             </div>
             <div class="card-body px-0 pb-2">
+                <div class="px-4 d-flex justify-content-between">
+                    <div>
+                        <button class="btn btn-icon btn-3 btn-primary btn-sm" type="button">
+                            <i class="fa fa-plus me-2"></i>
+                            <span>Yeni Müşteri</span>
+                        </button>
+                    </div>
+                    <div>
+                        <div class="input-group input-group-sm input-group-outline">
+                            <label class="form-label">Arama</label>
+                            <input type="text" class="form-control form-control-sm" />
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                         <thead>
