@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SupperCRMExample.DataAccess;
+using SupperCRMExample.DataAccess.Context;
+using SupperCRMExample.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +26,15 @@ namespace SupperCRMExample.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DatabaseContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                //options.UseLazyLoadingProxies();
+            });
             services.AddControllersWithViews();
+
+            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IClientRepository, ClientRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

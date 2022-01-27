@@ -46,6 +46,7 @@ namespace SupperCRMExample.Services
                 Email = model.Email,
                 Phone = model.Phone,
                 Locked = model.Locked,
+                IsCorporate = model.IsCorporate,
                 Description = model.Description,
                 CreatedAt = System.DateTime.Now
             };

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<SupperCRMExample.Entities.Client>
+
+@{
     ViewData["Title"] = "Müşteriler";
     ViewData["PageName"] = "customers-index";
 }
@@ -45,90 +47,95 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-center">
-                                    <span class="text-xs font-weight-bold mb-0">John Michael</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="text-xs font-weight-bold mb-0"><a href="mailto:john@creative-tim.com" target="_blank">john@creative-tim.com</a></span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="text-xs font-weight-bold">Bireysel</span>
-                                </td>
-                                <td class="align-middletext-sm text-center">
-                                    <span class="badge badge-sm bg-gradient-success">Aktif</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">27.01.2022 10:30</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <a href="javascript:;" class="text-info font-weight-bold text-xs me-2">
-                                        Düzenle
-                                    </a>
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-2">
-                                        Detay
-                                    </a>
-                                    <a href="javascript:;" class="text-danger font-weight-bold text-xs me-2">
-                                        Sil
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <span class="text-xs font-weight-bold mb-0">John Michael</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="text-xs font-weight-bold mb-0">john@creative-tim.com</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="text-xs font-weight-bold">Bireysel</span>
-                                </td>
-                                <td class="align-middletext-sm text-center">
-                                    <span class="badge badge-sm bg-gradient-secondary">Pasif</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">27.01.2022 10:30</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <a href="javascript:;" class="text-info font-weight-bold text-xs me-2">
-                                        Düzenle
-                                    </a>
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-2">
-                                        Detay
-                                    </a>
-                                    <a href="javascript:;" class="text-danger font-weight-bold text-xs me-2">
-                                        Sil
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <span class="text-xs font-weight-bold mb-0">John Michael</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="text-xs font-weight-bold mb-0">john@creative-tim.com</span>
-                                </td>
-                                <td class="text-center">
-                                    <span class="text-xs font-weight-bold">Bireysel</span>
-                                </td>
-                                <td class="align-middletext-sm text-center">
-                                    <span class="badge badge-sm bg-gradient-success">Aktif</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">27.01.2022 10:30</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <a href="javascript:;" class="text-info font-weight-bold text-xs me-2">
-                                        Düzenle
-                                    </a>
-                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-2">
-                                        Detay
-                                    </a>
-                                    <a href="javascript:;" class="text-danger font-weight-bold text-xs me-2">
-                                        Sil
-                                    </a>
-                                </td>
-                            </tr>
+
+                            @foreach (var client in Model)
+                            {
+                                <tr>
+                                    <td class="text-center">
+                                        <span class="text-xs font-weight-bold mb-0">@client.Name</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-xs font-weight-bold mb-0"><a href="mailto:@client.Email" target="_blank">@client.Email</a></span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-xs font-weight-bold">@(client.IsCorporate ? "Kurumsal" : "Bireysel")</span>
+                                    </td>
+                                    <td class="align-middletext-sm text-center">
+                                        <span class="badge badge-sm bg-gradient-@(client.Locked?"secondary":"success")">@(client.Locked ? "Pasif" : "Aktif")</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">@client.CreatedAt</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="javascript:;" class="text-info font-weight-bold text-xs me-2">
+                                            Düzenle
+                                        </a>
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-2">
+                                            Detay
+                                        </a>
+                                        <a href="javascript:;" class="text-danger font-weight-bold text-xs me-2">
+                                            Sil
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+
+                            @*<tr>
+                                    <td class="text-center">
+                                        <span class="text-xs font-weight-bold mb-0">John Michael</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-xs font-weight-bold mb-0">john@creative-tim.com</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-xs font-weight-bold">Bireysel</span>
+                                    </td>
+                                    <td class="align-middletext-sm text-center">
+                                        <span class="badge badge-sm bg-gradient-secondary">Pasif</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">27.01.2022 10:30</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="javascript:;" class="text-info font-weight-bold text-xs me-2">
+                                            Düzenle
+                                        </a>
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-2">
+                                            Detay
+                                        </a>
+                                        <a href="javascript:;" class="text-danger font-weight-bold text-xs me-2">
+                                            Sil
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <span class="text-xs font-weight-bold mb-0">John Michael</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-xs font-weight-bold mb-0">john@creative-tim.com</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-xs font-weight-bold">Bireysel</span>
+                                    </td>
+                                    <td class="align-middletext-sm text-center">
+                                        <span class="badge badge-sm bg-gradient-success">Aktif</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">27.01.2022 10:30</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a href="javascript:;" class="text-info font-weight-bold text-xs me-2">
+                                            Düzenle
+                                        </a>
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-2">
+                                            Detay
+                                        </a>
+                                        <a href="javascript:;" class="text-danger font-weight-bold text-xs me-2">
+                                            Sil
+                                        </a>
+                                    </td>
+                                </tr>*@
                         </tbody>
                     </table>
                 </div>
@@ -165,6 +172,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <a asp-action="FakeInsert" class="btn bg-gradient-primary">Fake Insert</a>
                         <button type="button" class="btn bg-gradient-primary">Save changes</button>
                         <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
                     </div>

@@ -38,6 +38,22 @@ namespace SupperCRMExample.WebApp.Controllers
             return View();
         }
 
+        // GET: CustomersController/FakeInsert
+        public ActionResult FakeInsert()
+        {
+            CreateCustomerModel model = new CreateCustomerModel
+            {
+                Name = "John Doe",
+                IsCorporate = false,
+                Email  = "john@doe.com",
+                Phone = "5556667788",
+                Description = "Lorem ipsum dolor sit a met."
+            };
+
+            _clientService.Create(model);
+            return RedirectToAction(nameof(Index));
+        }
+
         // POST: CustomersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
