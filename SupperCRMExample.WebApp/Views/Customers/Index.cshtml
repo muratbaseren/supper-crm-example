@@ -181,6 +181,7 @@
                                 <label class="form-label">Açıklama</label>
                                 <textarea id="desc" cols="30" rows="2" class="form-control"></textarea>
                             </div>
+                            <input type="hidden" id="clientid" value="" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -250,12 +251,26 @@
 
                 if (result != null) {
                     var modal_body = $("#modal-edit-client .modal-body");
-                    modal_body.find("#name").val(result.data.name);
-                    modal_body.find("#email").val(result.data.email);
-                    modal_body.find("#phone").val(result.data.phone);
-                    modal_body.find("#desc").val(result.data.description);
-                    modal_body.find("#iscorporate").val(result.data.isCorporate);
-                    modal_body.find("#locked").val(result.data.locked);
+                    var inp_name = modal_body.find("#name");
+                    var inp_email = modal_body.find("#email");
+                    var inp_phone = modal_body.find("#phone");
+                    var inp_desc = modal_body.find("#desc");
+                    var inp_iscorporate = modal_body.find("#iscorporate");
+                    var inp_locked = modal_body.find("#islocked");
+                    var inp_clientid = modal_body.find("#clientid");
+                    
+                    inp_name.val(result.data.name);
+                    inp_email.val(result.data.email);
+                    inp_phone.val(result.data.phone);
+                    inp_desc.val(result.data.description);
+                    inp_iscorporate.prop('checked', result.data.isCorporate);
+                    inp_locked.prop('checked', result.data.locked);
+                    inp_clientid.val(result.data.id);
+
+                    if (inp_name.val() != null) inp_name.parent().addClass("is-filled");
+                    if (inp_email.val() != null) inp_email.parent().addClass("is-filled");
+                    if (inp_phone.val() != null) inp_phone.parent().addClass("is-filled");
+                    if (inp_desc.val() != null) inp_desc.parent().addClass("is-filled");
                 }
             });
         }
