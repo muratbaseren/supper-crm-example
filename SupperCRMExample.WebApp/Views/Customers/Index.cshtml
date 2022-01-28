@@ -120,33 +120,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <p class="text-sm">
-                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod.
-                            </p>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Ad Soyad / Şirket Adı</label>
-                                <input id="name" type="text" class="form-control">
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">E-posta</label>
-                                <input id="email" type="email" class="form-control">
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Telefon</label>
-                                <input id="phone" type="tel" class="form-control">
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" id="iscorporate">
-                                <label class="custom-control-label" for="customCheck1">Kurumsal</label>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" id="islocked">
-                                <label class="custom-control-label" for="customCheck1">Pasif</label>
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Açıklama</label>
-                                <textarea id="desc" cols="30" rows="2" class="form-control"></textarea>
-                            </div>
+                            <partial name="_ModalInputs" model="@(new ModalInputViewModel())" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -168,34 +142,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <p class="text-sm">
-                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod.
-                            </p>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Ad Soyad / Şirket Adı</label>
-                                <input id="name" type="text" class="form-control">
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">E-posta</label>
-                                <input id="email" type="email" class="form-control">
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Telefon</label>
-                                <input id="phone" type="tel" class="form-control">
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" id="iscorporate">
-                                <label class="custom-control-label" for="customCheck1">Kurumsal</label>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" id="islocked">
-                                <label class="custom-control-label" for="customCheck1">Pasif</label>
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Açıklama</label>
-                                <textarea id="desc" cols="30" rows="2" class="form-control"></textarea>
-                            </div>
-                            <input type="hidden" id="clientid" value="" />
+                            <partial name="_ModalInputs" model="@(new ModalInputViewModel { HasClientId=true })" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -217,33 +164,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <p class="text-sm">
-                                Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod.
-                            </p>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Ad Soyad / Şirket Adı</label>
-                                <input id="name" type="text" class="form-control" readonly>
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">E-posta</label>
-                                <input id="email" type="email" class="form-control" readonly>
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Telefon</label>
-                                <input id="phone" type="tel" class="form-control" readonly>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" id="iscorporate" disabled>
-                                <label class="custom-control-label" for="customCheck1">Kurumsal</label>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" id="islocked" disabled>
-                                <label class="custom-control-label" for="customCheck1">Pasif</label>
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Açıklama</label>
-                                <textarea id="desc" cols="30" rows="2" class="form-control" readonly></textarea>
-                            </div>
+                            <partial name="_ModalInputs" model="@(new ModalInputViewModel { IsReadonly=true })" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -264,34 +185,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <p class="text-sm">
-                                Aşağıdaki müşteri kaydını silmek istediğinize emin misiniz?
-                            </p>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Ad Soyad / Şirket Adı</label>
-                                <input id="name" type="text" class="form-control" readonly>
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">E-posta</label>
-                                <input id="email" type="email" class="form-control" readonly>
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Telefon</label>
-                                <input id="phone" type="tel" class="form-control" readonly>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" id="iscorporate" disabled>
-                                <label class="custom-control-label" for="customCheck1">Kurumsal</label>
-                            </div>
-                            <div class="form-check my-3">
-                                <input class="form-check-input" type="checkbox" id="islocked" disabled>
-                                <label class="custom-control-label" for="customCheck1">Pasif</label>
-                            </div>
-                            <div class="input-group input-group-outline my-3">
-                                <label class="form-label">Açıklama</label>
-                                <textarea id="desc" cols="30" rows="2" class="form-control" readonly></textarea>
-                            </div>
-                            <input type="hidden" id="clientid" value="" />
+                            <partial name="_ModalInputs" model="@(new ModalInputViewModel { IsReadonly=true, HasClientId=true, Description="Aşağıdaki müşteri kaydını silmek istediğinize emin misiniz?" })" />
                         </div>
                     </div>
                     <div class="modal-footer">
