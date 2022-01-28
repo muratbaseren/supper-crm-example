@@ -30,7 +30,7 @@
                     <div>
                         <div class="input-group input-group-sm input-group-outline">
                             <label class="form-label">Arama</label>
-                            <input type="text" class="form-control form-control-sm" />
+                            <input id="search" type="text" class="form-control form-control-sm" />
                         </div>
                     </div>
                 </div>
@@ -349,7 +349,7 @@
                     var inp_iscorporate = modal_body.find("#iscorporate");
                     var inp_locked = modal_body.find("#islocked");
                     var inp_clientid = modal_body.find("#clientid");
-                    
+
                     inp_name.val(result.data.name);
                     inp_email.val(result.data.email);
                     inp_phone.val(result.data.phone);
@@ -423,7 +423,7 @@
                     var inp_desc = modal_body.find("#desc");
                     var inp_iscorporate = modal_body.find("#iscorporate");
                     var inp_locked = modal_body.find("#islocked");
-                    
+
                     inp_name.val(result.data.name);
                     inp_email.val(result.data.email);
                     inp_phone.val(result.data.phone);
@@ -492,5 +492,26 @@
                 }
             });
         }
+
+        //function searchRun(e) {
+        //    console.log(e);
+
+        //    if (e.key == "Enter") {
+        //        console.log("search", $("#search").val());
+        //    }
+        //}
+
+        $(function () {
+            $("#search").keyup(function (e) {
+                //console.log(e.key);
+
+                if (e.key == "Enter") {
+                    //console.log("search", $(this).val());
+                    var keyword = $(this).val();
+
+                }
+            });
+        });
+
     </script>
 }
