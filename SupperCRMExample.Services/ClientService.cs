@@ -12,6 +12,7 @@ namespace SupperCRMExample.Services
         List<Client> List();
         Client GetById(int id);
         void Update(int id, EditCustomerModel model);
+        void Delete(int id);
     }
 
     public class ClientService : IClientService
@@ -72,6 +73,11 @@ namespace SupperCRMExample.Services
             client.Locked = model.Locked;
 
             _repository.Update(client);
+        }
+
+        public void Delete(int id)
+        {
+            _repository.Remove(id);
         }
     }
 }

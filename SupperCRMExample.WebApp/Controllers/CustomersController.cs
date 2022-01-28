@@ -100,25 +100,24 @@ namespace SupperCRMExample.WebApp.Controllers
             return Json(response);
         }
 
-        // GET: CustomersController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: CustomersController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
         {
+            AjaxResponseModel<string> response = new AjaxResponseModel<string>();
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                _clientService.Delete(id);
+                response.Success = "Müşteri silindi.";
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                response.AddError("ex", ex.Message);
             }
+
+            return Json(response);
         }
     }
 }
