@@ -28,12 +28,26 @@
                         </button>
                     </div>
                     <div>
-                        <div class="input-group input-group-sm input-group-outline">
+                        <div class="input-group input-group-sm input-group-outline @(ViewData["search"] != null ? "is-filled" : "")">
                             <label class="form-label">Arama</label>
-                            <input id="search" type="text" class="form-control form-control-sm" />
+                            <input id="search" type="text" class="form-control form-control-sm" value="@ViewData["search"]" />
+                            @if (ViewData["search"] != null)
+                            {
+                                <span>
+                                    <a asp-action="Index" class="ms-3 text-sm text-danger">Temizle</a>
+                                </span>
+                            }
                         </div>
                     </div>
                 </div>
+                @if (ViewData["search"] != null)
+                {
+                    <div class="px-5">
+                        <p class="text-sm text-secondary font-weight-bold">
+                            Arama sonucunu görüntülüyorsunuz : <span class="text-primary">@ViewData["search"]</span>
+                        </p>
+                    </div>
+                }
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                         <thead>
@@ -493,14 +507,6 @@
             });
         }
 
-        //function searchRun(e) {
-        //    console.log(e);
-
-        //    if (e.key == "Enter") {
-        //        console.log("search", $("#search").val());
-        //    }
-        //}
-
         $(function () {
             $("#search").keyup(function (e) {
                 //console.log(e.key);
@@ -508,7 +514,7 @@
                 if (e.key == "Enter") {
                     //console.log("search", $(this).val());
                     var keyword = $(this).val();
-
+                    window.location = "/Customers/Index?search=" + encodeURI(keyword);
                 }
             });
         });

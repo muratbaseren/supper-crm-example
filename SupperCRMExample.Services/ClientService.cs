@@ -13,6 +13,7 @@ namespace SupperCRMExample.Services
         Client GetById(int id);
         void Update(int id, EditCustomerModel model);
         void Delete(int id);
+        List<Client> ListBySearch(string search);
     }
 
     public class ClientService : IClientService
@@ -78,6 +79,15 @@ namespace SupperCRMExample.Services
         public void Delete(int id)
         {
             _repository.Remove(id);
+        }
+
+        public List<Client> ListBySearch(string search)
+        {
+            return _repository.GetAll(x => 
+                        x.Name.Contains(search) || 
+                        x.Email.Contains(search) || 
+                        x.Phone.Contains(search) || 
+                        x.Description.Contains(search));
         }
     }
 }

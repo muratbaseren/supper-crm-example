@@ -4,6 +4,7 @@ using SupperCRMExample.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace SupperCRMExample.DataAccess.Abstract
 {
@@ -24,6 +25,11 @@ namespace SupperCRMExample.DataAccess.Abstract
         public List<TEntity> GetAll()
         {
             return _set.ToList();
+        }
+
+        public List<TEntity> GetAll(Expression<Func<TEntity,bool>> predicate)
+        {
+            return _set.Where(predicate).ToList();
         }
 
         public TEntity Get(int id)
