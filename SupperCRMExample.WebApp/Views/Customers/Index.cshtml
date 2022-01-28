@@ -88,63 +88,6 @@
                                     </td>
                                 </tr>
                             }
-
-                            @*<tr>
-                                    <td class="text-center">
-                                        <span class="text-xs font-weight-bold mb-0">John Michael</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="text-xs font-weight-bold mb-0">john@creative-tim.com</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="text-xs font-weight-bold">Bireysel</span>
-                                    </td>
-                                    <td class="align-middletext-sm text-center">
-                                        <span class="badge badge-sm bg-gradient-secondary">Pasif</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">27.01.2022 10:30</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="javascript:;" class="text-info font-weight-bold text-xs me-2">
-                                            Düzenle
-                                        </a>
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-2">
-                                            Detay
-                                        </a>
-                                        <a href="javascript:;" class="text-danger font-weight-bold text-xs me-2">
-                                            Sil
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <span class="text-xs font-weight-bold mb-0">John Michael</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="text-xs font-weight-bold mb-0">john@creative-tim.com</span>
-                                    </td>
-                                    <td class="text-center">
-                                        <span class="text-xs font-weight-bold">Bireysel</span>
-                                    </td>
-                                    <td class="align-middletext-sm text-center">
-                                        <span class="badge badge-sm bg-gradient-success">Aktif</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">27.01.2022 10:30</span>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <a href="javascript:;" class="text-info font-weight-bold text-xs me-2">
-                                            Düzenle
-                                        </a>
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs me-2">
-                                            Detay
-                                        </a>
-                                        <a href="javascript:;" class="text-danger font-weight-bold text-xs me-2">
-                                            Sil
-                                        </a>
-                                    </td>
-                                </tr>*@
                         </tbody>
                     </table>
                 </div>
@@ -225,9 +168,27 @@
             $.ajax({
                 method: "post",
                 url: "/Customers/Create",
-                data: data
+                data: data,
+                beforeSend: function () {
+                    modal_body.find(".is-invalid").removeClass("is-invalid");
+                }
             }).done(function (result) {
                 console.log("result", result);
+                
+                if (result.error == true) {
+                    for (var i in result.errors) {
+                        var err = result.errors[i];
+                        modal_body.find("#" + err.key.toLocaleLowerCase()).parent().addClass("is-invalid");
+                        toastr.error(err.value, "Hata");
+                    }
+                } else {
+                    // başarı mesajı göster ve modal kapat.
+                    toastr.success(result.success, "Başarılı");
+
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
+                }
             });
         }
     </script>

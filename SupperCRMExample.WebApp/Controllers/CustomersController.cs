@@ -43,13 +43,27 @@ namespace SupperCRMExample.WebApp.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Create(CreateCustomerModel model)
         {
+            AjaxResponseModel<string> response = new AjaxResponseModel<string>();
+
             if (ModelState.IsValid)
             {
                 _clientService.Create(model);
-                return Json(new { ok = true });
+
+                response.Success = "Müşteri eklendi.";
+                return Json(response);
             }
 
-            return Json(new { ok = false });
+            foreach (var key in ModelState.Keys)
+            {
+                var item = ModelState.GetValueOrDefault(key);
+
+                if (item != null && item.Errors.Count > 0)
+                {
+                    item.Errors.ToList().ForEach(err => response.AddError(key, err.ErrorMessage));
+                }
+            }
+
+            return Json(response);
         }
 
         // GET: CustomersController/Edit/5

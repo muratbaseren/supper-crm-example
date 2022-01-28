@@ -4,5 +4,11 @@
     "inputFiles": [
       "wwwroot/assets/js/material-dashboard.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/js/scripts.min.js",
+    "inputFiles": [
+      "wwwroot/assets/js/scripts.js"
+    ]
   }
 ]
