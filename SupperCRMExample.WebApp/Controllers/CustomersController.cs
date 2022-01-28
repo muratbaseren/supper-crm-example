@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SupperCRMExample.Entities;
 using SupperCRMExample.Models;
 using SupperCRMExample.Services;
 using System;
@@ -69,7 +70,8 @@ namespace SupperCRMExample.WebApp.Controllers
         // GET: CustomersController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var client = _clientService.GetById(id);
+            return Json(new AjaxResponseModel<Client> { Data = client });
         }
 
         // POST: CustomersController/Edit/5

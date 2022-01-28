@@ -10,6 +10,7 @@ namespace SupperCRMExample.Services
         void Create(string name, string email);
         void Create(CreateCustomerModel model);
         List<Client> List();
+        Client GetById(int id);
     }
 
     public class ClientService : IClientService
@@ -52,6 +53,11 @@ namespace SupperCRMExample.Services
             };
 
             _repository.Add(client);
+        }
+
+        public Client GetById(int id)
+        {
+            return _repository.Get(id);
         }
     }
 }
