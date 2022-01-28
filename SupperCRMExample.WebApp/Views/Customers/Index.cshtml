@@ -232,7 +232,7 @@
                     }
                 } else {
                     // başarı mesajı göster ve modal kapat.
-                    toastr.success(result.success, "Başarılı");
+                    toastr.success(result.success, "Yeni Kayıt");
 
                     setTimeout(function () {
                         window.location.reload();
@@ -246,9 +246,6 @@
                 method: "get",
                 url: "/Customers/Edit/" + clientid
             }).done(function (result) {
-
-                console.log(result);
-
                 if (result != null) {
                     var modal_body = $("#modal-edit-client .modal-body");
                     var inp_name = modal_body.find("#name");
@@ -271,6 +268,53 @@
                     if (inp_email.val() != null) inp_email.parent().addClass("is-filled");
                     if (inp_phone.val() != null) inp_phone.parent().addClass("is-filled");
                     if (inp_desc.val() != null) inp_desc.parent().addClass("is-filled");
+                }
+            });
+        }
+
+
+        function updateClient() {
+            var modal_body = $("#modal-edit-client .modal-body");
+            var fname = modal_body.find("#name").val();
+            var femail = modal_body.find("#email").val();
+            var fphone = modal_body.find("#phone").val();
+            var fdesc = modal_body.find("#desc").val();
+            var fiscorporate = modal_body.find("#iscorporate").is(':checked');
+            var flocked = modal_body.find("#islocked").is(':checked');
+            var fid = modal_body.find("#clientid").val();
+
+            var data = {
+                "name": fname,
+                "email": femail,
+                "phone": fphone,
+                "description": fdesc,
+                "iscorporate": fiscorporate,
+                "locked": flocked
+            };
+
+            $.ajax({
+                method: "post",
+                url: "/Customers/Edit/" + fid,
+                data: data,
+                beforeSend: function () {
+                    modal_body.find(".is-invalid").removeClass("is-invalid");
+                }
+            }).done(function (result) {
+                console.log("result", result);
+
+                if (result.error == true) {
+                    for (var i in result.errors) {
+                        var err = result.errors[i];
+                        modal_body.find("#" + err.key.toLocaleLowerCase()).parent().addClass("is-invalid");
+                        toastr.error(err.value, "Hata");
+                    }
+                } else {
+                    // başarı mesajı göster ve modal kapat.
+                    toastr.success(result.success, "Güncellendi");
+
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
                 }
             });
         }

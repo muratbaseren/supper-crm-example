@@ -54,6 +54,13 @@ namespace SupperCRMExample.WebApp.Controllers
                 return Json(response);
             }
 
+            AddModelStateErrorsToAjaxResponse(response);
+
+            return Json(response);
+        }
+
+        private void AddModelStateErrorsToAjaxResponse(AjaxResponseModel<string> response)
+        {
             foreach (var key in ModelState.Keys)
             {
                 var item = ModelState.GetValueOrDefault(key);
@@ -63,8 +70,6 @@ namespace SupperCRMExample.WebApp.Controllers
                     item.Errors.ToList().ForEach(err => response.AddError(key, err.ErrorMessage));
                 }
             }
-
-            return Json(response);
         }
 
         // GET: CustomersController/Edit/5
@@ -74,19 +79,24 @@ namespace SupperCRMExample.WebApp.Controllers
             return Json(new AjaxResponseModel<Client> { Data = client });
         }
 
-        // POST: CustomersController/Edit/5
+        // POST: Customers/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, EditCustomerModel model)
         {
-            try
+            AjaxResponseModel<string> response = new AjaxResponseModel<string>();
+
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                _clientService.Update(id, model);
+
+                response.Success = "Müşteri güncellendi.";
+                return Json(response);
             }
-            catch
-            {
-                return View();
-            }
+
+            AddModelStateErrorsToAjaxResponse(response);
+
+            return Json(response);
         }
 
         // GET: CustomersController/Delete/5

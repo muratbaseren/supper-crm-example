@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SupperCRMExample.Models
 {
-    public class CreateCustomerModel
+    public abstract class CustomerBaseModel
     {
-        [Display(Name="Ad Soyad / Şirket Adı")]
-        [Required(ErrorMessage ="{0} alanı zorunludur.")]
+        [Display(Name = "Ad Soyad / Şirket Adı")]
+        [Required(ErrorMessage = "{0} alanı zorunludur.")]
         [StringLength(60, ErrorMessage = "{0} alanı en fazla {1} karakter olabilir.")]
         public string Name { get; set; } // John Doe or Codeove
 
@@ -29,5 +29,15 @@ namespace SupperCRMExample.Models
 
         [Display(Name = "Pasif")]
         public bool Locked { get; set; }
+    }
+
+    public class CreateCustomerModel : CustomerBaseModel
+    {
+
+    }
+
+    public class EditCustomerModel : CustomerBaseModel
+    {
+
     }
 }

@@ -11,6 +11,7 @@ namespace SupperCRMExample.Services
         void Create(CreateCustomerModel model);
         List<Client> List();
         Client GetById(int id);
+        void Update(int id, EditCustomerModel model);
     }
 
     public class ClientService : IClientService
@@ -58,6 +59,19 @@ namespace SupperCRMExample.Services
         public Client GetById(int id)
         {
             return _repository.Get(id);
+        }
+
+        public void Update(int id, EditCustomerModel model)
+        {
+            Client client = _repository.Get(id);
+            client.Name = model.Name;
+            client.Email = model.Email;
+            client.Description = model.Description;
+            client.Phone = model.Phone;
+            client.IsCorporate = model.IsCorporate;
+            client.Locked = model.Locked;
+
+            _repository.Update(client);
         }
     }
 }
