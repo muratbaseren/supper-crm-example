@@ -3,10 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SupperCRMExample.Common;
 using SupperCRMExample.Models;
 using SupperCRMExample.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SupperCRMExample.WebApp.Controllers
 {
@@ -52,6 +48,11 @@ namespace SupperCRMExample.WebApp.Controllers
             return Json(response);
         }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction(nameof(Login));
+        }
         public IActionResult CreateFakeUser()
         {
             _userService.Create(new CreateUserModel

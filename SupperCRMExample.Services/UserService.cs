@@ -39,6 +39,7 @@ namespace SupperCRMExample.Services
                 Email = model.Email,
                 Username = model.Username,
                 Password = (Constants.PasswordSalt + model.Password).MD5(),
+                Role = model.Role,
                 Locked = model.Locked,
                 CreatedAt = System.DateTime.Now
             };

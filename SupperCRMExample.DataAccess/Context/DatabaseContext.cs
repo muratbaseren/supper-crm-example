@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SupperCRMExample.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SupperCRMExample.DataAccess.Context
 {
@@ -15,5 +10,6 @@ namespace SupperCRMExample.DataAccess.Context
         }
 
         public DbSet<Client> Clients { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
