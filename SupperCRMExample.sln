@@ -5,13 +5,15 @@ VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupperCRMExample.WebApp", "SupperCRMExample.WebApp\SupperCRMExample.WebApp.csproj", "{4DF9CD23-A714-45B8-AE10-DDE34CE88A83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupperCRMExample.Services", "SupperCRMExample.Services\SupperCRMExample.Services.csproj", "{A6E6BE87-75F6-4C7C-99E3-EB6E29070A78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupperCRMExample.Services", "SupperCRMExample.Services\SupperCRMExample.Services.csproj", "{A6E6BE87-75F6-4C7C-99E3-EB6E29070A78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupperCRMExample.DataAccess", "SupperCRMExample.DataAccess\SupperCRMExample.DataAccess.csproj", "{DA27502A-6E03-4400-8825-C94FA8B562B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupperCRMExample.DataAccess", "SupperCRMExample.DataAccess\SupperCRMExample.DataAccess.csproj", "{DA27502A-6E03-4400-8825-C94FA8B562B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupperCRMExample.Entities", "SupperCRMExample.Entities\SupperCRMExample.Entities.csproj", "{D131B059-3D91-4AED-B571-F62D9BD473E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupperCRMExample.Entities", "SupperCRMExample.Entities\SupperCRMExample.Entities.csproj", "{D131B059-3D91-4AED-B571-F62D9BD473E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupperCRMExample.Models", "SupperCRMExample.Models\SupperCRMExample.Models.csproj", "{22DC50FC-6B51-4DE4-B54E-22B63953265D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupperCRMExample.Models", "SupperCRMExample.Models\SupperCRMExample.Models.csproj", "{22DC50FC-6B51-4DE4-B54E-22B63953265D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupperCRMExample.Common", "SupperCRMExample.Common\SupperCRMExample.Common.csproj", "{B4CDBEDB-627A-4EFD-941C-1683840EC167}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{22DC50FC-6B51-4DE4-B54E-22B63953265D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22DC50FC-6B51-4DE4-B54E-22B63953265D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22DC50FC-6B51-4DE4-B54E-22B63953265D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4CDBEDB-627A-4EFD-941C-1683840EC167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4CDBEDB-627A-4EFD-941C-1683840EC167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4CDBEDB-627A-4EFD-941C-1683840EC167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4CDBEDB-627A-4EFD-941C-1683840EC167}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

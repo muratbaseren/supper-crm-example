@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NETCore.Encrypt" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SupperCRMExample.Common\SupperCRMExample.Common.csproj" />
     <ProjectReference Include="..\SupperCRMExample.DataAccess\SupperCRMExample.DataAccess.csproj" />
     <ProjectReference Include="..\SupperCRMExample.Models\SupperCRMExample.Models.csproj" />
   </ItemGroup>

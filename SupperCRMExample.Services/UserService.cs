@@ -1,4 +1,6 @@
-﻿using SupperCRMExample.DataAccess;
+﻿using NETCore.Encrypt.Extensions;
+using SupperCRMExample.Common;
+using SupperCRMExample.DataAccess;
 using SupperCRMExample.Entities;
 using SupperCRMExample.Models;
 using System.Linq;
@@ -23,6 +25,7 @@ namespace SupperCRMExample.Services
         public User Authenticate(AuthenticateModel model)
         {
             model.Username = model.Username.Trim();
+            model.Password = (Constants.PasswordSalt + model.Password).MD5();
 
             return _repository.GetAll(x =>
                 x.Username.ToLower() == model.Username.ToLower() && x.Password == model.Password).FirstOrDefault();
@@ -35,7 +38,7 @@ namespace SupperCRMExample.Services
                 Name = model.Name,
                 Email = model.Email,
                 Username = model.Username,
-                Password = model.Password,
+                Password = (Constants.PasswordSalt + model.Password).MD5(),
                 Locked = model.Locked,
                 CreatedAt = System.DateTime.Now
             };
