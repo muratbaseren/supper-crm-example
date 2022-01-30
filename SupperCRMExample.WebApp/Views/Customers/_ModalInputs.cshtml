@@ -27,6 +27,6 @@
     <label class="form-label">Açıklama</label>
     <textarea id="desc" cols="30" rows="2" class="form-control" @(Model.IsReadonly ? "readonly" : "")></textarea>
 </div>
-@if (Model.HasClientId) { 
+@if (Model.HasId) { 
 <input type="hidden" id="clientid" value="" />
 }

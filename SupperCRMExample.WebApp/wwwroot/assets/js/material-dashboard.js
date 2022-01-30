@@ -538,7 +538,7 @@ function getEventTarget(e) {
 
 window.onload = function() {
   // Material Design Input function
-  var inputs = document.querySelectorAll('input,textarea');
+  var inputs = document.querySelectorAll('input,textarea,select');
 
   for (var i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('focus', function(e) {

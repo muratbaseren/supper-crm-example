@@ -142,7 +142,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <partial name="_ModalInputs" model="@(new ModalInputViewModel { HasClientId=true })" />
+                            <partial name="_ModalInputs" model="@(new ModalInputViewModel { HasId=true })" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -185,7 +185,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <partial name="_ModalInputs" model="@(new ModalInputViewModel { IsReadonly=true, HasClientId=true, Description="Aşağıdaki müşteri kaydını silmek istediğinize emin misiniz?" })" />
+                            <partial name="_ModalInputs" model="@(new ModalInputViewModel { IsReadonly=true, HasId=true, Description="Aşağıdaki müşteri kaydını silmek istediğinize emin misiniz?" })" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -388,6 +388,7 @@
             }).done(function (result) {
                 if (result.error == true) {
                     for (var i in result.errors) {
+                        var err = result.errors[i];
                         toastr.error(err.value, "Hata");
                     }
                 } else {

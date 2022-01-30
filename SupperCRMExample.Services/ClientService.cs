@@ -1,6 +1,7 @@
 ﻿using SupperCRMExample.DataAccess;
 using SupperCRMExample.Entities;
 using SupperCRMExample.Models;
+using SupperCRMExample.Services.Abstract;
 using System.Collections.Generic;
 
 namespace SupperCRMExample.Services
@@ -16,18 +17,13 @@ namespace SupperCRMExample.Services
         List<Client> ListBySearch(string search);
     }
 
-    public class ClientService : IClientService
+    public class ClientService : ServiceBase<Client, IClientRepository>, IClientService
     {
         private readonly IClientRepository _repository;
 
-        public ClientService(IClientRepository repository)
+        public ClientService(IClientRepository repository) : base(repository)
         {
             _repository = repository;
-        }
-
-        public List<Client> List()
-        {
-            return _repository.GetAll();
         }
 
         public void Create(string name, string email)
@@ -58,11 +54,6 @@ namespace SupperCRMExample.Services
             _repository.Add(client);
         }
 
-        public Client GetById(int id)
-        {
-            return _repository.Get(id);
-        }
-
         public void Update(int id, EditCustomerModel model)
         {
             Client client = _repository.Get(id);
@@ -76,17 +67,12 @@ namespace SupperCRMExample.Services
             _repository.Update(client);
         }
 
-        public void Delete(int id)
-        {
-            _repository.Remove(id);
-        }
-
         public List<Client> ListBySearch(string search)
         {
-            return _repository.GetAll(x => 
-                        x.Name.Contains(search) || 
-                        x.Email.Contains(search) || 
-                        x.Phone.Contains(search) || 
+            return _repository.GetAll(x =>
+                        x.Name.Contains(search) ||
+                        x.Email.Contains(search) ||
+                        x.Phone.Contains(search) ||
                         x.Description.Contains(search));
         }
     }

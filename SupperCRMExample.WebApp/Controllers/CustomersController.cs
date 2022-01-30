@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SupperCRMExample.Entities;
 using SupperCRMExample.Models;
 using SupperCRMExample.Services;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace SupperCRMExample.WebApp.Controllers
 {
