@@ -5,12 +5,11 @@ using SupperCRMExample.Models;
 using SupperCRMExample.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SupperCRMExample.WebApp.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomersController : ControllerBase
     {
         private readonly IClientService _clientService;
 
@@ -71,18 +70,7 @@ namespace SupperCRMExample.WebApp.Controllers
             return Json(response);
         }
 
-        private void AddModelStateErrorsToAjaxResponse(AjaxResponseModel<string> response)
-        {
-            foreach (var key in ModelState.Keys)
-            {
-                var item = ModelState.GetValueOrDefault(key);
-
-                if (item != null && item.Errors.Count > 0)
-                {
-                    item.Errors.ToList().ForEach(err => response.AddError(key, err.ErrorMessage));
-                }
-            }
-        }
+        
 
         // GET: CustomersController/Edit/5
         public ActionResult Edit(int id)

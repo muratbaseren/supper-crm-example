@@ -32,6 +32,12 @@ namespace SupperCRMExample.WebApp
                 //options.UseLazyLoadingProxies();
             });
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+            services.AddSession(opts =>
+            {
+                opts.Cookie.Name = "suppercrm.session";
+                opts.IdleTimeout = TimeSpan.FromMinutes(20);
+            });
 
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -51,12 +57,10 @@ namespace SupperCRMExample.WebApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseSession();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
