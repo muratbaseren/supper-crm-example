@@ -1,5 +1,6 @@
 ﻿using SupperCRMExample.Entities.Abstract;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,5 +25,7 @@ namespace SupperCRMExample.Entities
         public string Role { get; set; }
         public bool Locked { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        public virtual List<Issue> Issues { get; set; }
     }
 }

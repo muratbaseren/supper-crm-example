@@ -21,17 +21,17 @@ where TRepository : IRepository<TEntity>
             _repository = repository;
         }
 
-        public List<TEntity> List()
+        public virtual List<TEntity> List()
         {
             return _repository.GetAll();
         }
 
-        public TEntity GetById(int id)
+        public virtual TEntity GetById(int id)
         {
             return _repository.Get(id);
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             _repository.Remove(id);
         }

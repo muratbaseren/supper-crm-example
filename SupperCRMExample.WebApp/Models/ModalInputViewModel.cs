@@ -6,4 +6,9 @@
         public string Description { get; set; } = "Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod.";
         public bool HasId { get; set; } = false;
     }
+
+    public class ModalInputIssueViewModel: ModalInputViewModel
+    {
+        public bool HasCompletedField { get; set; } 
+    }
 }

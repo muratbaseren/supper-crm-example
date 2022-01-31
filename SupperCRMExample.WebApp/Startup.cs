@@ -41,9 +41,11 @@ namespace SupperCRMExample.WebApp
 
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IIssueRepository, IssueRepository>();
 
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IIssueService, IssueService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
