@@ -219,6 +219,7 @@
                                                 url = Url.Action("Index", "Issues");
                                                 break;
                                             case SupperCRMExample.Entities.NotifyType.LeadAdded:
+                                            case SupperCRMExample.Entities.NotifyType.LeadChanged:
                                             case SupperCRMExample.Entities.NotifyType.LeadCompleted:
                                                 url = Url.Action("Index", "Leads");
                                                 break;
@@ -232,8 +233,12 @@
                                                     @switch (item.Type)
                                                     {
                                                         case SupperCRMExample.Entities.NotifyType.IssueAdded:
-                                                        case SupperCRMExample.Entities.NotifyType.IssueChanged:
                                                             <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                                                                <i class="fa fa-check"></i>
+                                                            </div>
+                                                            break;
+                                                        case SupperCRMExample.Entities.NotifyType.IssueChanged:
+                                                            <div class="avatar avatar-sm bg-gradient-primary  me-3  my-auto">
                                                                 <i class="fa fa-check"></i>
                                                             </div>
                                                             break;
@@ -244,6 +249,11 @@
                                                             break;
                                                         case SupperCRMExample.Entities.NotifyType.LeadAdded:
                                                             <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+                                                                <i class="material-icons opacity-10">group_work</i>
+                                                            </div>
+                                                            break;
+                                                        case SupperCRMExample.Entities.NotifyType.LeadChanged:
+                                                            <div class="avatar avatar-sm bg-gradient-primary  me-3  my-auto">
                                                                 <i class="material-icons opacity-10">group_work</i>
                                                             </div>
                                                             break;

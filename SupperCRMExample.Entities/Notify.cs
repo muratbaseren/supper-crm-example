@@ -24,6 +24,7 @@ namespace SupperCRMExample.Entities
         IssueChanged = 1,
         IssueCompleted = 2,
         LeadAdded = 3,
-        LeadCompleted = 4
+        LeadChanged = 4,
+        LeadCompleted = 5
     }
 }

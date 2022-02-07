@@ -11,4 +11,9 @@
     {
         public bool HasCompletedField { get; set; } 
     }
+
+    public class ModalInputLeadViewModel : ModalInputViewModel
+    {
+        public bool HasTypeField { get; set; }
+    }
 }
