@@ -9,10 +9,12 @@ namespace SupperCRMExample.WebApp.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly ILogService _logService;
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, ILogService logService)
         {
             _userService = userService;
+            _logService = logService;
         }
 
         public IActionResult Login()
@@ -36,6 +38,9 @@ namespace SupperCRMExample.WebApp.Controllers
                     HttpContext.Session.SetString(Constants.Session_Name, user.Name);
                     HttpContext.Session.SetString(Constants.Session_Role, user.Role);
                     HttpContext.Session.SetInt32(Constants.Session_Id, user.Id);
+
+                    // todo : sistem girişi yapıldı log u tutulur.
+                    _logService.Create("Sistem girişi yapıldı.", Entities.LogType.SystemEntry, user.Id);
                 }
                 else
                     response.AddError(nameof(model.Username), "Hatalı kullanıcı adı ya da şifre.");
@@ -50,7 +55,16 @@ namespace SupperCRMExample.WebApp.Controllers
 
         public IActionResult Logout()
         {
+            int? userId = HttpContext.Session.GetInt32(Constants.Session_Id);
+
+            if (userId != null)
+            {
+                // todo : sistem çıkılı yapıldı log u tutulur.
+                _logService.Create("Sistem çıkışı yapıldı.", Entities.LogType.SystemEntry, userId.Value);
+            }
+
             HttpContext.Session.Clear();
+
             return RedirectToAction(nameof(Login));
         }
         public IActionResult CreateFakeUser()
@@ -61,7 +75,7 @@ namespace SupperCRMExample.WebApp.Controllers
                 Email = "muratbaseren@gmail.com",
                 Password = "123123",
                 Locked = false,
-                RePassword  ="123123",
+                RePassword = "123123",
                 Role = "admin",
                 Username = "muratbaseren"
             });

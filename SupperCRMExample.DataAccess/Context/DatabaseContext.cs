@@ -13,5 +13,6 @@ namespace SupperCRMExample.DataAccess.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Issue> Issues { get; set; }
         public DbSet<Notify> Notifies { get; set; }
+        public DbSet<Log> Logs { get; set; }
     }
 }
