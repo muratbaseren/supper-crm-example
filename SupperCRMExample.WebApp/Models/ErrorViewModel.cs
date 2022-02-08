@@ -1,5 +1,3 @@
-using System;
-
 namespace SupperCRMExample.WebApp.Models
 {
     public class ErrorViewModel

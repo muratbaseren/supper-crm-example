@@ -8,9 +8,6 @@ using SupperCRMExample.DataAccess;
 using SupperCRMExample.DataAccess.Context;
 using SupperCRMExample.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SupperCRMExample.WebApp
 {

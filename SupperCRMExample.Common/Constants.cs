@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SupperCRMExample.Common
+﻿namespace SupperCRMExample.Common
 {
     public class Constants
     {

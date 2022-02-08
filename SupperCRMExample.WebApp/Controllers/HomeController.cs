@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SupperCRMExample.Common;
 using SupperCRMExample.Models;
 using SupperCRMExample.Services;
 using SupperCRMExample.WebApp.Filters;
 using SupperCRMExample.WebApp.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SupperCRMExample.WebApp.Controllers
 {
