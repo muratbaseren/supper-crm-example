@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SupperCRMExample.Common;
+using SupperCRMExample.Models;
+using SupperCRMExample.Services;
 using SupperCRMExample.WebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -23,7 +27,7 @@ namespace SupperCRMExample.WebApp.Controllers
             return View();
         }
 
-        public IActionResult Dashboard()
+        public IActionResult Dashboard([FromServices] IIssueService issueService, [FromServices] IClientService clientService, [FromServices] ILeadService leadService)
         {
             return View();
         }
@@ -31,6 +35,14 @@ namespace SupperCRMExample.WebApp.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        // Home/GenFakeData
+        public string GenFakeData([FromServices] IMockService mockService)
+        {
+            mockService.RunFakeGenerator();
+
+            return "ok";
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
