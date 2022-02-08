@@ -1,4 +1,5 @@
 ﻿@inject SupperCRMExample.Services.ILogService _logService
+@model SupperCRMExample.Models.DashboardModel
 
 @{
     ViewData["Title"] = "Dashboard";
@@ -17,12 +18,12 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Yeni Görev(Bugün)</p>
-                    <h4 class="mb-0"><span class="text-success">2</span> / 3</h4>
+                    <h4 class="mb-0"><span class="text-success">@Model.TodayCompletedIssueCount</span> / @Model.TodayIssueCount</h4>
                 </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-                <p class="mb-0">Dün'e göre <span class="text-success text-sm font-weight-bolder">+55% </span></p>
+                <p class="mb-0">Dün'e göre <span class="text-@(Model.IssueRateByYesterday > 0 ? "success" : "danger") text-sm font-weight-bolder">@Model.IssueRateByYesterday% </span></p>
             </div>
         </div>
     </div>
@@ -34,12 +35,12 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Yeni Müşteri(Bugün)</p>
-                    <h4 class="mb-0">23</h4>
+                    <h4 class="mb-0">@Model.TodayClientCount</h4>
                 </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-                <p class="mb-0">Dün'e göre <span class="text-success text-sm font-weight-bolder">+3% </span></p>
+                <p class="mb-0">Dün'e göre <span class="text-@(Model.ClientRateByYesterday > 0 ? "success" : "danger") text-sm font-weight-bolder">@Model.ClientRateByYesterday% </span></p>
             </div>
         </div>
     </div>
@@ -51,12 +52,12 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Toplam Müşteri</p>
-                    <h4 class="mb-0"><span class="text-danger">34</span> / 110</h4>
+                    <h4 class="mb-0"><span class="text-danger">@Model.ThisYearClientCount</span> / @Model.TotalClientCount</h4>
                 </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-                <p class="mb-0">Geçen yıl'a göre <span class="text-danger text-sm font-weight-bolder">-2%</span></p>
+                <p class="mb-0">Geçen yıl'a göre <span class="text-@(Model.ClientRateByLastYear > 0 ? "success" : "danger") text-sm font-weight-bolder">@Model.ClientRateByLastYear%</span></p>
             </div>
         </div>
     </div>
@@ -68,12 +69,12 @@
                 </div>
                 <div class="text-end pt-1">
                     <p class="text-sm mb-0 text-capitalize">Tahsilat(Bugün)</p>
-                    <h4 class="mb-0">₺10.450</h4>
+                    <h4 class="mb-0">@Model.TodayCompletedLeadSum.ToString("C0")</h4>
                 </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-                <p class="mb-0">Dün'e göre <span class="text-success text-sm font-weight-bolder">+5% </span></p>
+                <p class="mb-0">Dün'e göre <span class="text-@(Model.CompletedLeadPriceRateByYesterday > 0 ? "success" : "danger") text-sm font-weight-bolder">@Model.CompletedLeadPriceRateByYesterday% </span></p>
             </div>
         </div>
     </div>
@@ -149,7 +150,7 @@
                         <h6>Talepler</h6>
                         <p class="text-sm mb-0">
                             <i class="fa fa-check text-info" aria-hidden="true"></i>
-                            Bu ay <span class="font-weight-bold ms-1">30 adet tamamlandı.</span>
+                            Bu ay <span class="font-weight-bold ms-1">@Model.CompletedLeadCountForThisMonth adet tamamlandı.</span>
                         </p>
                     </div>
                     @*<div class="col-lg-6 col-5 my-auto text-end">
@@ -178,146 +179,65 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <i class="fa fa-check me-2"></i>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">John Doe</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="avatar-group mt-2">
-                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                            <img src="~/assets/img/team-1.jpg" alt="team1"> <span class="text-sm text-secondary ms-2">Ryan Tompson</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold"> ₺14,000 </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-sm text-secondary ms-2">Bekliyor</span>
-                                    @*<div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">60%</span>
-                                                </div>
+                            @foreach (var lead in Model.Last10Leads)
+                            {
+                                string badgeColor = "secondary";
+                                string badgeText = string.Empty;
+
+                                switch (lead.Type)
+                                {
+                                    case SupperCRMExample.Entities.LeadType.Waiting:
+                                        badgeColor = "primary";
+                                        badgeText = "Bekliyor";
+                                        break;
+                                    case SupperCRMExample.Entities.LeadType.Offered:
+                                        badgeColor = "info";
+                                        badgeText = "Tekliflendi";
+                                        break;
+                                    case SupperCRMExample.Entities.LeadType.ToCall:
+                                        badgeColor = "warning";
+                                        badgeText = "Aranacak";
+                                        break;
+                                    case SupperCRMExample.Entities.LeadType.OnSale:
+                                        badgeColor = "secondary";
+                                        badgeText = "Satışta";
+                                        break;
+                                    case SupperCRMExample.Entities.LeadType.Completed:
+                                        badgeColor = "success";
+                                        badgeText = "Tamamlandı";
+                                        break;
+                                    default:
+                                        badgeColor = "secondary";
+                                        badgeText = "---";
+                                        break;
+                                }
+
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <i class="fa fa-check me-2"></i>
                                             </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">@lead.Client.Name</h6>
                                             </div>
-                                        </div>*@
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <i class="fa fa-check me-2"></i>
                                         </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">John Doe</h6>
+                                    </td>
+                                    <td>
+                                        <div class="avatar-group mt-2">
+                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
+                                                <span class="text-sm text-secondary ms-2">@lead.User.Name</span>
+                                            </a>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="avatar-group mt-2">
-                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                            <img src="~/assets/img/team-1.jpg" alt="team1"> <span class="text-sm text-secondary ms-2">Ryan Tompson</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold"> ₺14,000 </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-sm text-secondary ms-2">Bekliyor</span>
-                                    @*<div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">60%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>*@
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <i class="fa fa-check me-2"></i>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">John Doe</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="avatar-group mt-2">
-                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                            <img src="~/assets/img/team-1.jpg" alt="team1"> <span class="text-sm text-secondary ms-2">Ryan Tompson</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold"> ₺14,000 </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-sm text-secondary ms-2">Bekliyor</span>
-                                    @*<div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">60%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>*@
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <i class="fa fa-check me-2"></i>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">John Doe</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="avatar-group mt-2">
-                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                                            <img src="~/assets/img/team-1.jpg" alt="team1"> <span class="text-sm text-secondary ms-2">Ryan Tompson</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold"> ₺14,000 </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-sm text-secondary ms-2">Bekliyor</span>
-                                    @*<div class="progress-wrapper w-75 mx-auto">
-                                            <div class="progress-info">
-                                                <div class="progress-percentage">
-                                                    <span class="text-xs font-weight-bold">60%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress">
-                                                <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>*@
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="text-xs font-weight-bold">@lead.Price.ToString("C0")</span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <span class="badge badge-sm bg-gradient-@badgeColor">@badgeText</span>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -370,15 +290,15 @@
         new Chart(ctx, {
             type: "bar",
             data: {
-                labels: ["M", "T", "W", "T", "F", "S", "S"],
+                labels: [@Html.Raw(string.Join(",", Model.ClientCountForLastWeek.Reverse().Select(x => "'" + x.Key + "'").ToArray()))],
                 datasets: [{
-                    label: "Sales",
+                    label: "Müşteri Sayısı",
                     tension: 0.4,
                     borderWidth: 0,
                     borderRadius: 4,
                     borderSkipped: false,
                     backgroundColor: "rgba(255, 255, 255, .8)",
-                    data: [50, 20, 10, 22, 50, 10, 40],
+                    data: [@string.Join(",", Model.ClientCountForLastWeek.Reverse().Select(x => x.Value).ToArray())],
                     maxBarThickness: 6
                 },],
             },
@@ -451,9 +371,9 @@
         new Chart(ctx2, {
             type: "line",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: [@Html.Raw(string.Join(",", Model.ClientCountForLastYear.Reverse().Select(x => "'" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(x.Key).Substring(0,3).ToUpper() + "'").ToArray()))],
                 datasets: [{
-                    label: "Mobile apps",
+                    label: "Müşteri Sayısı",
                     tension: 0,
                     borderWidth: 0,
                     pointRadius: 5,
@@ -464,7 +384,7 @@
                     borderWidth: 4,
                     backgroundColor: "transparent",
                     fill: true,
-                    data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+                    data: [@string.Join(",", Model.ClientCountForLastYear.Reverse().Select(x => x.Value).ToArray())],
                     maxBarThickness: 6
 
                 }],
@@ -534,9 +454,9 @@
         new Chart(ctx3, {
             type: "line",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: [@Html.Raw(string.Join(",", Model.MonthlyLeadPricesForLastYear.Reverse().Select(x => "'" + System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(x.Key).Substring(0,3).ToUpper() + "'").ToArray()))],
                 datasets: [{
-                    label: "Mobile apps",
+                    label: "Toplam Tutar",
                     tension: 0,
                     borderWidth: 0,
                     pointRadius: 5,
@@ -546,7 +466,7 @@
                     borderWidth: 4,
                     backgroundColor: "transparent",
                     fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                    data: [@string.Join(",", Model.MonthlyLeadPricesForLastYear.Reverse().Select(x => x.Value).ToArray())],
                     maxBarThickness: 6
 
                 }],

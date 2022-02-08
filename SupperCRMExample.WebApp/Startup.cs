@@ -54,6 +54,7 @@ namespace SupperCRMExample.WebApp
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<ILeadService, LeadService>();
             services.AddScoped<IMockService, MockService>();
+            services.AddScoped<IDashboardService, DashboardService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

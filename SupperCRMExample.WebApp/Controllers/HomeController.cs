@@ -27,9 +27,10 @@ namespace SupperCRMExample.WebApp.Controllers
             return View();
         }
 
-        public IActionResult Dashboard([FromServices] IIssueService issueService, [FromServices] IClientService clientService, [FromServices] ILeadService leadService)
+        public IActionResult Dashboard([FromServices] IDashboardService dashboardService)
         {
-            return View();
+            DashboardModel model = dashboardService.GetDashboardModel();            
+            return View(model);
         }
 
         public IActionResult Privacy()

@@ -16,10 +16,10 @@ namespace SupperCRMExample.Models
         public int ThisYearClientCount { get; set; }
         public int ClientRateByLastYear { get; set; }
 
-        public int TodayLeadPrice { get; set; }
-        public int LeadPriceRateByYesterday { get; set; }
+        public int TodayCompletedLeadSum { get; set; }
+        public int CompletedLeadPriceRateByYesterday { get; set; }
 
-        public Dictionary<int, int> ClientCountForLastWeek { get; set; }
+        public Dictionary<string, int> ClientCountForLastWeek { get; set; }
         public Dictionary<int, int> ClientCountForLastYear { get; set; }
         public Dictionary<int, int> MonthlyLeadPricesForLastYear { get; set; }
 
