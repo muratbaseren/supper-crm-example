@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SupperCRMExample.Common;
 using SupperCRMExample.Models;
 using SupperCRMExample.Services;
+using SupperCRMExample.WebApp.Filters;
 
 namespace SupperCRMExample.WebApp.Controllers
 {
@@ -53,6 +55,7 @@ namespace SupperCRMExample.WebApp.Controllers
             return Json(response);
         }
 
+        [Auth]
         public IActionResult Logout()
         {
             int? userId = HttpContext.Session.GetInt32(Constants.Session_Id);
@@ -67,6 +70,8 @@ namespace SupperCRMExample.WebApp.Controllers
 
             return RedirectToAction(nameof(Login));
         }
+
+        [Auth]
         public IActionResult CreateFakeUser()
         {
             _userService.Create(new CreateUserModel

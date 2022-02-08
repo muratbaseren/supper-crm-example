@@ -4,12 +4,14 @@ using SupperCRMExample.Common;
 using SupperCRMExample.Entities;
 using SupperCRMExample.Models;
 using SupperCRMExample.Services;
+using SupperCRMExample.WebApp.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SupperCRMExample.WebApp.Controllers
 {
+    [Auth]
     public class IssuesController : ControllerBase
     {
         private readonly IIssueService _issueService;

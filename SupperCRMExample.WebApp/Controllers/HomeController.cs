@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using SupperCRMExample.Common;
 using SupperCRMExample.Models;
 using SupperCRMExample.Services;
+using SupperCRMExample.WebApp.Filters;
 using SupperCRMExample.WebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace SupperCRMExample.WebApp.Controllers
 {
+    [Auth]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -29,7 +31,7 @@ namespace SupperCRMExample.WebApp.Controllers
 
         public IActionResult Dashboard([FromServices] IDashboardService dashboardService)
         {
-            DashboardModel model = dashboardService.GetDashboardModel();            
+            DashboardModel model = dashboardService.GetDashboardModel();
             return View(model);
         }
 

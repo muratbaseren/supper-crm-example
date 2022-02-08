@@ -2,11 +2,13 @@
 using SupperCRMExample.Entities;
 using SupperCRMExample.Models;
 using SupperCRMExample.Services;
+using SupperCRMExample.WebApp.Filters;
 using System;
 using System.Collections.Generic;
 
 namespace SupperCRMExample.WebApp.Controllers
 {
+    [Auth]
     public class CustomersController : ControllerBase
     {
         private readonly IClientService _clientService;

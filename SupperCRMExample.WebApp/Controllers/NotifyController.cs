@@ -4,10 +4,12 @@ using SupperCRMExample.Common;
 using SupperCRMExample.Entities;
 using SupperCRMExample.Models;
 using SupperCRMExample.Services;
+using SupperCRMExample.WebApp.Filters;
 using System.Collections.Generic;
 
 namespace SupperCRMExample.WebApp.Controllers
 {
+    [Auth]
     public class NotifyController : ControllerBase
     {
         private readonly INotifyService _notifyService;
