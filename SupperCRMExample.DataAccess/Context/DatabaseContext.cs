@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SupperCRMExample.Entities;
+using System.Linq;
 
 namespace SupperCRMExample.DataAccess.Context
 {
@@ -7,6 +8,12 @@ namespace SupperCRMExample.DataAccess.Context
     {
         public DatabaseContext(DbContextOptions options) : base(options)
         {
+            var migrations = Database.GetPendingMigrations().ToList();
+
+            if (migrations.Count > 0)
+            {
+                Database.Migrate();
+            }
         }
 
         public DbSet<Client> Clients { get; set; }

@@ -5,6 +5,7 @@ namespace SupperCRMExample.Services
     public interface IMockService
     {
         void RunFakeGenerator();
+        void AddAdmin(string email, string name, string username, string password);
     }
 
     public class MockService : IMockService
@@ -19,6 +20,11 @@ namespace SupperCRMExample.Services
         public void RunFakeGenerator()
         {
             _repository.GenerateFakeData();
+        }
+
+        public void AddAdmin(string email, string name, string username, string password)
+        {
+            _repository.AddAdmin(email, name, username, password);
         }
     }
 }

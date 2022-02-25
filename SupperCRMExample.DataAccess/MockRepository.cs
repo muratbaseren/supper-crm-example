@@ -10,6 +10,7 @@ namespace SupperCRMExample.DataAccess
     public interface IMockRepository
     {
         void GenerateFakeData();
+        void AddAdmin(string email, string name, string username, string password);
     }
 
     public class MockRepository : IMockRepository
@@ -19,6 +20,24 @@ namespace SupperCRMExample.DataAccess
         public MockRepository(DatabaseContext context)
         {
             _context = context;
+        }
+
+        public void AddAdmin(string email, string name, string username, string password)
+        {
+            if (_context.Users.Any(x => x.Username == email)) return;
+
+            _context.Users.Add(new Entities.User
+            {
+                Email = email,
+                Password = (Constants.PasswordSalt + password).MD5(),
+                Name = name,
+                Username = username,
+                Role = Constants.Role_Admin,
+                CreatedAt = DateTime.Now
+            });
+
+
+            _context.SaveChanges();
         }
 
         public void GenerateFakeData()
@@ -90,5 +109,7 @@ namespace SupperCRMExample.DataAccess
 
             _context.SaveChanges();
         }
+
+
     }
 }
